@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='description' content="777social by Seven777, chat with friends -_-."/>
+    <title>777social | by - seven777</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+    
+    <section>
+
+        <nav>
+            <img src="./assets/logo.png" alt="777social">
+            <ul>
+                <li>Chat</li>
+                <li>Criador</li>
+            </ul>
+        </nav>
+
+        <div class="container-messages" id="cm">
+            <div class='messages'>
+                <div class='top'>
+                    <h2>Conversas gerais</h2>
+                </div>
+                <div class='chat' id="chat-box"></div>
+            </div>
+            <div class='textbox'><input type="text" placeholder="Insira sua mensagem" id="message-input" maxlength="300"><button onclick="sendMessage()"><iconify-icon icon="lucide:send" width="20" height="20"></iconify-icon></button></div>
+        </div>
+
+        <div class='container-info' id="ci">
+            <div class='inputs'>
+                <input type="text" id="url" placeholder="URL de Avatar"><br>
+                <input type="text" id="name" placeholder="Nome do seu usuario"><br>
+                <input type="submit" id="setinfo" onclick="setInformations()">
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+            function setInformations() {
+
+            console.log('Enviando dados.');
+
+            var urlInput = document.getElementById('url');
+            var nameInput = document.getElementById('name');
+
+            var urlvalue = urlInput.value;
+            var namevalue = nameInput.value;
+
+            if (urlvalue.trim() === '' || namevalue.trim() === '') {
+                alert("Preencha todos os campos");
+                return;
+            }
+
+            // Usando operador de coalescência nula para definir um valor padrão
+            author = namevalue ?? 'undefined';
+            avatar = urlvalue ?? 'https://i.pinimg.com/736x/3c/67/75/3c67757cef723535a7484a6c7bfbfc43.jpg';
+
+            document.getElementById('cm').style.display = 'flex';
+            document.getElementById('ci').style.display = 'none';
+
+            console.log(author);
+            console.log(avatar);
+            }
+
+            function sendMessage() {
+    var messageInput = document.getElementById("message-input");
+    var messageText = messageInput.value;
+    
+    if (messageText.trim() === "") {
+        alert("Por favor, digite uma mensagem.");
+        return;
+    }
+    
+    var chatBox = document.getElementById("chat-box");
+    var messageElement = document.createElement("div");
+    messageElement.classList.add("message-box");
+    
+    // Criar elemento de imagem
+    var imageElement = document.createElement("img");
+    imageElement.src = avatar; // Definir o caminho da imagem
+    
+    // Criar elemento de parágrafo para o texto
+    var paragraphElement = document.createElement("p");
+    paragraphElement.textContent = author + ': ' + messageText; // Adicionar o texto à <p>
+    
+    // Criar elemento de span para exibir o horário
+    var timeElement = document.createElement("span");
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+    var timeString = hours + ":" + (minutes < 10 ? "0" + minutes : minutes);
+    timeElement.textContent = timeString; // Adicionar o horário ao span
+    
+    // Adicionar a imagem, o texto e o horário ao elemento da mensagem
+    messageElement.appendChild(imageElement);
+    messageElement.appendChild(paragraphElement);
+    messageElement.appendChild(timeElement);
+    
+    // Adicionar a mensagem à caixa de chat
+    chatBox.appendChild(messageElement);
+    
+    // Limpar o campo de entrada
+    messageInput.value = "";
+
+    console.log(author);
+    console.log(avatar);
+}
+    </script>
+
+</body>
+</html>
